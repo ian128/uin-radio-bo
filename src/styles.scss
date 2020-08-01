@@ -1,1 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+@import './assets/scss/color.scss';
+@import './assets/scss/override.scss';
+@import './assets/scss/theme.scss';
+@import './assets/fonts/font.scss';
+
+$theme-colors: (
+  "primary": $primary,
+  "danger": $danger,
+  "dark": $dark
+);
+
+
+html, body {
+  overflow-x: hidden;
+}
+body {
+  position: relative;
+  font-family: av-nxt !important;
+  padding-right: 0 !important
+}
+
+header{
+  width: 100% !important;
+}
+@import "node_modules/bootstrap/scss/bootstrap";

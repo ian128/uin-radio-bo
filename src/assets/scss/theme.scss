@@ -1,0 +1,43 @@
+@import "../fonts/font.scss";
+@import "./color.scss";
+
+.bg-green{
+    background-color: $primary;
+}
+
+.bg-light-gray{
+    background-color: $light-gray;
+}
+
+.capitalize{
+    text-transform: uppercase;
+}
+
+.white{
+    color: #FFFFFF;
+}
+
+.title{
+    font-family: av-nxt-bold;
+    font-size: 18px;
+    line-height: 1.1;
+}
+
+.subtitle{
+    font-family: av-nxt;
+    font-size: 14px;
+}
+
+.content{
+    font-family: av-nxt;
+    font-size: 12px;
+}
+
+.caption{
+    font-size: 12px;
+}
+
+a{
+    cursor: pointer;
+    color: $primary !important;
+}

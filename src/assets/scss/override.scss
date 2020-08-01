@@ -1,0 +1,57 @@
+@import "./color.scss";
+@import "../fonts/font.scss";
+
+.btn{
+    border-radius: 0 !important;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1{ margin: 2pt 2pt 2pt 2pt !important; font-size: 32px; }
+h2{ margin: 2pt 2pt 2pt 2pt !important; font-size: 28px; }
+h3{ margin: 2pt 2pt 2pt 2pt !important; font-size: 24px; }
+h4{ margin: 2pt 2pt 2pt 2pt !important; font-size: 20px; }
+h5{ margin: 2pt 2pt 2pt 2pt !important; font-size: 16px; }
+h6{ margin: 2pt 2pt 2pt 2pt !important; font-size: 12px; }
+
+.text-primary{
+    color: $primary !important;
+}
+
+.carousel-control-prev,.carousel-control-next{
+    width: 30pt !important;
+    background-color: #000000A0 !important;
+}
+
+.modal{
+    overflow: hidden;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.modal-content{
+    border-radius: 0 !important;
+}
+
+input{
+    border-radius: 0 !important;
+    font-family: av-nxt !important;
+    font-size: 10pt !important;
+    margin-bottom: 6pt !important;
+}
+
+input[type="radio"]:checked{
+    color: $primary !important;
+}
+
+.form-control:focus {
+    box-shadow: 0px 0px 5px #000000A0 !important;
+}
+
+textarea{
+    font-size: 10pt !important;
+    border-radius: 0 !important;
+    min-height: 100pt;
+}

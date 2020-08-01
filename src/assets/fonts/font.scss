@@ -1,0 +1,22 @@
+@font-face {
+    font-family: av-nxt-bold;
+    src: url(assets/fonts/av-nxt-b.otf) format("opentype");
+}
+
+@font-face {
+    font-family: av-nxt-demi;
+    src: url(assets/fonts/av-nxt-db.otf) format("opentype");
+}
+
+@font-face {
+    font-family: av-nxt;
+    src: url(assets/fonts/av-nxt-r.otf) format("opentype");
+}
+
+.bold{
+    font-family: av-nxt-bold !important;
+}
+
+.demibold{
+    font-family: av-nxt-demi !important;
+}
