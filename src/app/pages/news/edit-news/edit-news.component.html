@@ -1,0 +1,38 @@
+<form [formGroup]="form">
+    <label>News Title</label>
+    <input class="form-control" formControlName="title" placeholder="news title">
+    <label>Author</label>
+    <input class="form-control" formControlName="author" placeholder="news author">
+    <label>News Picture</label>
+    <div class="news-picture" (click)="imageinput.click()">
+        <img [src]="selectedImg? selectedImg : '/assets/images/pictures/upload_image.png' ">
+        <input
+        style="display: none"
+        type="file" (change)="imageChanged($event)"
+        #imageinput accept=".png,.jpg">
+    </div>
+    <label>News Content</label>
+    <quill-editor [styles]="{  height: '80vh'}"
+    [(ngModel)]="content"
+    [ngModelOptions]="{standalone: true}"
+    (ngModelChange)="updateRichText()">
+        <div quill-editor-toolbar>
+            <span class="ql-formats">
+            <button class="gbtn ql-bold" [title]="'Bold'"></button>
+            <button class="gbtn ql-italic" [title]="'Italic'"></button>
+            <button class="gbtn ql-underline" [title]="'Underline'"></button>
+            </span>
+            <span class="ql-formats">
+            <button class="gbtn ql-list" value="ordered" [title]="'List'"></button>
+            <button class="gbtn ql-list" value="bullet" [title]="'Bullet List'"></button>
+        </span>
+        </div>
+    </quill-editor>
+    
+    <div class="row mt-3">
+        <div class="col text-right">
+            <button class="btn btn-danger mr-2">Discard</button>
+            <button class="btn btn-primary" (click)="form.valid? submit(): null" [disabled]="!form.valid">Save</button>
+        </div>
+    </div>
+</form>

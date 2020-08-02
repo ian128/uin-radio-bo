@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { state, trigger, style, transition, animate } from '@angular/animations';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/service/auth.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +11,11 @@ import { state, trigger, style, transition, animate } from '@angular/animations'
   animations:[
     trigger('showSideBar', [
       state('false', style({
-        'width': '0%',
+        'width': '45pt',
         'overflow': 'hidden'
       })),
       state('true', style({
-        'width': '15%',
+        'width': '120pt',
         'overflow': 'hidden'
       })),
       transition('false => true', [
@@ -25,10 +28,10 @@ import { state, trigger, style, transition, animate } from '@angular/animations'
 
     trigger('expandedMenu', [
       state('false', style({
-        'width': '100%',
+        'width': 'calc(100% - 45pt)',
       })),
       state('true', style({
-        'width': '85%',
+        'width': 'calc(100% - 120pt)',
         'box-shadow': '-10px 0px 10px #00000050'
 
       })),
@@ -44,5 +47,60 @@ import { state, trigger, style, transition, animate } from '@angular/animations'
 export class AppComponent {
   collapsed: boolean
 
+  flags={
+    isProcessing: false
+  }
+
+  form = new FormGroup({
+    email: new FormControl(null, {
+      validators: [Validators.required, Validators.email],
+      updateOn: 'change'
+    }),
+    password: new FormControl(null,{
+      validators: [Validators.required],
+      updateOn: 'change'
+    }),
+  })
+
+  constructor(
+    public router: Router,
+    private authSvc: AuthService
+  ){}
+
   title = 'uin-radio-bo';
+
+  link(){
+    let s = this.router.url
+    if(s.includes('news/list')) return 'News List'
+    else if(s.includes('news/edit')) return 'News Edit'
+    else if(s.includes('news/new')) return 'New News'
+    else if(s.includes('user/list')) return 'List User'
+  }
+
+  async login(){
+    this.flags.isProcessing=true
+
+    try{
+      let res: any = await this.authSvc.login(this.form.value).toPromise()
+      if(res.status == 0) alert("Wrong email and/or password combinations")
+      else {
+        if(res.as == 1){
+          alert("Login is successful")
+          this.authSvc.writeAdminToken(res)
+        }else{
+          alert("You don't have access to be admin")
+        }
+      }
+
+    }catch(e){
+      console.log(e)
+    }
+    finally{
+      this.flags.isProcessing=false
+    }
+  }
+
+  isLoggedIn(){
+    return this.authSvc.getAdmin()
+  }
 }

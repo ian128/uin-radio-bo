@@ -41,3 +41,40 @@ a{
     cursor: pointer;
     color: $primary !important;
 }
+
+quill-editor{
+    font-family: av-nxt !important;
+    .ql-container{
+        background-color: #ffffff !important;
+    }
+
+    [quill-editor-toolbar]{
+        border-top: none !important;
+        border-left: none !important;
+        border-right: none !important;
+        padding-left: 0px !important;
+
+        .ql-formats{
+            .gbtn:first-child{
+                border: 1px solid #D2D2D2;
+                border-radius: 4px 0px 0px 4px;
+            }
+            .gbtn{
+                border-top: 1px solid #D2D2D2;
+                border-right: 1px solid #D2D2D2;
+                border-bottom: 1px solid #D2D2D2;
+            }
+            .gbtn:last-child{
+                border-top: 1px solid #D2D2D2;
+                border-bottom: 1px solid #D2D2D2;
+                border-right: 1px solid #D2D2D2;
+                border-radius: 0px 4px 4px 0px;
+            }
+        }
+    }
+    
+}
+
+label{
+    font-size: 12px !important;
+}

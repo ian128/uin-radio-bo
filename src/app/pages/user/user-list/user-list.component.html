@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col">
+        <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">User ID</th>
+                <th scope="col">Full Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Type</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of listOfUser; let i = index">
+                <th scope="row">{{item.id}}</th>
+                <td>{{item.nama}}</td>
+                <td>{{item.email}}</td>
+                <td>{{item.gender}}</td>
+                <td>{{item.phone}}</td>
+                <td style="pointer-events: none;">
+                    <span class="badge badge-pill badge-secondary" *ngIf="item.status == '0'">Reguler</span>
+                    <span class="badge badge-pill badge-primary" *ngIf="item.status == '1'">Admin</span>
+                </td>
+                <td>
+                    <button class="btn btn-primary btn-sm mr-1">Edit</button>
+                    <button class="btn btn-danger btn-sm" (click)="deleteUser(item.nama, item.email)">Delete</button>
+                </td>
+
+              </tr>
+            </tbody>
+          </table>
+    </div>
+</div>

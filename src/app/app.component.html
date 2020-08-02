@@ -1,39 +1,61 @@
-<div class="row">
-  <div [@showSideBar]="collapsed ? 'true': 'false'"
-  class="bg-secondary"
-  style="height: 100vh !important;">
-    <ul class="pl-2">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Users</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">News</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Videos</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Inquiries</a>
-      </li>
-    </ul>
-      
-  </div>
+<div class="row p-5" *ngIf="!isLoggedIn(); else loggedIn">
+  <form [formGroup]="form" class="col-6 offset-3 card p-4">
+    <h5>Please login to continue</h5>
+    <label>Email</label>
+    <input class="form-control" formControlName="email">
+    <form-error [fCon]="form.controls.email"></form-error>
+    <label>Password</label>
+    <input type="password" class="form-control" formControlName="password">
+    <form-error [fCon]="form.controls.password"></form-error>
 
-  <div
-  class="pl-0"
-  [@expandedMenu]="collapsed ? 'true': 'false'">
-    <nav class="navbar navbar-dark bg-dark">
-      <button class="navbar-toggler ml-2" type="button"
-      (click)="collapsed= !collapsed">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-  
-      <a class="navbar-brand">
-        UIN Radio Backend
-      </a>
+    <button class="btn btn-primary btn-block mb-4" [disabled]="!form.valid || this.flags.isProcessing" (click)="login()">
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" [hidden]="!flags.isProcessing"></span>
+      {{this.flags.isProcessing? "Please wait.." : "Login"}}
+    </button>
 
-    </nav>
-
-    <router-outlet></router-outlet>
-  </div>
+    <div class="text-center caption">(2020) - Radio Sinfoni 107.8 FM - UIN Mataram </div>
+  </form>
 </div>
+
+<ng-template #loggedIn>
+  <div class="row p-0">
+    <div [@showSideBar]="collapsed ? 'true': 'false'"class="bg-secondary">
+      <ul class="pl-2">
+        <li class="nav-item active">
+          <a class="nav-link" routerLinkActive="bold" routerLink="/user">Users</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="bold" routerLink="/news">News</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="bold" routerLink="/video">Videos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"  routerLinkActive="bold" routerLink="/inquiry">Inquiries</a>
+        </li>
+      </ul>
+    </div>
+  
+    <div
+    class="right-side"
+    [@expandedMenu]="collapsed ? 'true': 'false'">
+  
+      <nav class="navbar navbar-dark bg-dark" style="height: 50pt !important">
+        <button class="navbar-toggler ml-2" type="button"
+        (click)="collapsed= !collapsed">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <a class="navbar-brand">
+          UIN Radio Backend - {{link()}}
+        </a>
+      </nav>
+  
+      <div class="pt-4 pl-4 pb-4 pr-4 mr-3" style="height: calc(100vh - 50pt); overflow-y: scroll; overflow-x: hidden;">
+        <router-outlet></router-outlet>
+      </div>
+  
+    </div>
+  </div>
+</ng-template>
+

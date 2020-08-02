@@ -1,0 +1,24 @@
+<div class="row mb-4" routerLink="/news/new">
+    <div class="col text-right">
+        <button class="btn btn-primary">Create News</button>
+    </div>
+</div>
+<div class="row m-3 border" *ngFor="let item of listOfNews; let i=index">
+    <div class="col-3 p-0 news-img">
+        <img [src]="'http://developergadogado.xyz/mantapp/'+item.image" style="height: 100%; width: 100%; object-fit: cover;">
+    </div>
+    <div class="col-6 p-3">
+        <div class="title" >
+            {{item.title}}
+        </div>
+        <div class="subtitle" style="height: 75%" [innerHTML]="item.content">
+        </div>
+        <div class="caption">
+            Published on {{item.datetime}}
+        </div>
+    </div>
+    <div class="col-3 p-3 text-right">
+        <button class="btn btn-primary btn-sm mr-2" routerLink="/news/edit/{{item.id}}">Edit News</button>
+        <button class="btn btn-danger btn-sm">Delete News</button>
+    </div>
+</div>
