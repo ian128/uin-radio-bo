@@ -86,7 +86,6 @@ export class EditNewsComponent implements OnInit {
           return
         }
 
-      
         this.selectedImg=res
         this.selectedImgFile=target.files.item(0)
         this.form.controls.image.setValue(this.selectedImgFile)
@@ -120,6 +119,7 @@ export class EditNewsComponent implements OnInit {
       }
     }catch(e){
       console.warn(e)
+      
     }finally{
       this.flags.isProcessing=false
     }

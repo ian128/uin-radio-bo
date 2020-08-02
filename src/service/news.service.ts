@@ -33,7 +33,7 @@ export class NewsService{
         let res: any[]= await this.http.get<any>(environment.base_API+'news/').toPromise()
         let news = res.find( i => i.id == id)
         return news
-     }
+    }
 
     createNews(body){
         return this.http.post(environment.base_API+'news/add', this.convertToFormData(body))

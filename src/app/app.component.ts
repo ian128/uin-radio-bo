@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { state, trigger, style, transition, animate } from '@angular/animations';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { AuthService } from 'src/service/auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Toast, ToastrService } from 'ngx-toastr';
@@ -67,7 +67,16 @@ export class AppComponent {
     public router: Router,
     private authSvc: AuthService,
     private toastSvc: ToastrService
-  ){}
+  ){
+
+    this.router.events.subscribe(
+      (res)=>{
+        if(res instanceof NavigationEnd){
+          window.scrollTo(0, 0);
+        }
+      }
+    )
+  }
 
   title = 'uin-radio-bo';
 
