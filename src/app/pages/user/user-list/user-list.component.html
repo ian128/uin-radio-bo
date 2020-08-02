@@ -12,6 +12,7 @@
                 <th scope="col">Action</th>
               </tr>
             </thead>
+            
             <tbody>
               <tr *ngFor="let item of listOfUser; let i = index">
                 <th scope="row">{{item.id}}</th>
@@ -23,9 +24,17 @@
                     <span class="badge badge-pill badge-secondary" *ngIf="item.status == '0'">Reguler</span>
                     <span class="badge badge-pill badge-primary" *ngIf="item.status == '1'">Admin</span>
                 </td>
-                <td>
-                    <button class="btn btn-primary btn-sm mr-1">Edit</button>
-                    <button class="btn btn-danger btn-sm" (click)="deleteUser(item.nama, item.email)">Delete</button>
+                <td *ngIf="flags.isDeletingUser != item.email">
+                    <button class="btn btn-primary btn-sm mr-1"
+                    [disabled]="flags.isDeletingUser">Edit</button>
+                    <button class="btn btn-danger btn-sm" (click)="deleteUser(item.nama, item.email)"
+                    [disabled]="flags.isDeletingUser">Delete</button>
+                </td>
+                <td *ngIf="flags.isDeletingUser == item.email">
+                  <span class="btn btn-danger btn-sm">
+                    <div class="spinner-border spinner-border-sm" role="status"></div> Deleting...
+                  </span>
+
                 </td>
 
               </tr>

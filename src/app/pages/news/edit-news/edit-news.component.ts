@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NewsService } from 'src/service/news.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-edit-news',
@@ -9,11 +11,11 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./edit-news.component.scss']
 })
 export class EditNewsComponent implements OnInit {
-  selectedImg: any
+  selectedImg: any = '/assets/pictures/placeholder/img_upload.jpg'
   selectedImgFile: File
 
   selectedID: any
-  content= "<p>Bisa <strong>Bold</strong>, <em>Italic</em>, <u>Underline</u></p>"
+  content: any
 
   form = new FormGroup({
     title: new FormControl(null,{
@@ -31,9 +33,15 @@ export class EditNewsComponent implements OnInit {
     })
   })
 
+  flags={
+    isProcessing: false
+  }
+
   constructor(
     private newsSvc: NewsService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private toastSvc: ToastrService,
+    private location: Location
   ) {
     this.selectedID = this.activatedRoute.snapshot.params.id
   }
@@ -96,19 +104,24 @@ export class EditNewsComponent implements OnInit {
     this.form.controls.datetime.patchValue(new Date().toISOString())
     let body = this.form.value
     console.log(body)
-
+    
+    this.flags.isProcessing=true
     try{
       if(this.selectedID){
         let res = await this.newsSvc.editNews(this.selectedID,body).toPromise()
         console.log(res)
+        this.toastSvc.success("News has been edited successfully")
+        this.location.back()
       }else{
         let res = await this.newsSvc.createNews(body).toPromise()
         console.log(res)
+        this.toastSvc.success("News has been created successfully")
+        this.location.back()
       }
     }catch(e){
       console.warn(e)
     }finally{
-
+      this.flags.isProcessing=false
     }
   }
 }

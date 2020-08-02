@@ -26,7 +26,7 @@ export class AuthService{
     }
 
     logOut(){
-        this.cookiesSvc.delete('admin')
+        console.log(this.cookiesSvc.delete('admin','/'))
         return true
     }
 

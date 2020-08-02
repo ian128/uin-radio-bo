@@ -1,15 +1,23 @@
 <form [formGroup]="form">
-    <label>News Title</label>
-    <input class="form-control" formControlName="title" placeholder="news title">
-    <label>Author</label>
-    <input class="form-control" formControlName="author" placeholder="news author">
-    <label>News Picture</label>
-    <div class="news-picture" (click)="imageinput.click()">
-        <img [src]="selectedImg? selectedImg : '/assets/images/pictures/upload_image.png' ">
-        <input
-        style="display: none"
-        type="file" (change)="imageChanged($event)"
-        #imageinput accept=".png,.jpg">
+    <div class="row">
+        <div class="col-6">
+            <label>News Title</label>
+            <input class="form-control" formControlName="title" placeholder="news title">
+            <form-error [fCon]="form.controls.title"></form-error>
+            <label>Author</label>
+            <input class="form-control" formControlName="author" placeholder="news author">
+            <form-error [fCon]="form.controls.author"></form-error>
+        </div>
+        <div class="col-6">
+            <label>News Picture</label>
+            <div class="news-picture border" (click)="imageinput.click()">
+                <img [src]="selectedImg? selectedImg : '/assets/images/pictures/upload_image.png' ">
+                <input
+                style="display: none"
+                type="file" (change)="imageChanged($event)"
+                #imageinput accept=".png,.jpg">
+            </div>
+        </div>
     </div>
     <label>News Content</label>
     <quill-editor [styles]="{  height: '80vh'}"
@@ -28,11 +36,16 @@
         </span>
         </div>
     </quill-editor>
+    <form-error [fCon]="form.controls.content"></form-error>
     
     <div class="row mt-3">
         <div class="col text-right">
             <button class="btn btn-danger mr-2">Discard</button>
-            <button class="btn btn-primary" (click)="form.valid? submit(): null" [disabled]="!form.valid">Save</button>
+
+            <button class="btn btn-primary" [disabled]="!form.valid || this.flags.isProcessing" 
+            (click)="form.valid? submit(): null" [disabled]="!form.valid">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" [hidden]="!flags.isProcessing"></span>
+                {{this.flags.isProcessing? "Please wait.." : "Save"}}</button>
         </div>
     </div>
 </form>

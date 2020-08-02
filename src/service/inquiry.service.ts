@@ -1,4 +1,3 @@
-
 import { Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -6,7 +5,7 @@ import { environment } from 'src/environments/environment';
 @Injectable({
     providedIn: 'root'
 })
-export class NewsService{
+export class InquiryService{
     constructor(
         private http: HttpClient
     ){}
@@ -25,25 +24,7 @@ export class NewsService{
         return fData
     }
 
-    getNews(){
-       return this.http.get(environment.base_API+'news/')
-    }
-
-    async getNewsDetail(id){
-        let res: any[]= await this.http.get<any>(environment.base_API+'news/').toPromise()
-        let news = res.find( i => i.id == id)
-        return news
-     }
-
-    createNews(body){
-        return this.http.post(environment.base_API+'news/add', this.convertToFormData(body))
-    }
-
-    editNews(id, body){
-        return this.http.post(environment.base_API+'news/edit/'+id, this.convertToFormData(body))
-    }
-
-    deleteNews(id){
-        return this.http.get(environment.base_API+'news/delete/'+id)
+    getInquiries(){
+       return this.http.get(environment.base_API+'contact/')
     }
 }

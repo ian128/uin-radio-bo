@@ -3,6 +3,7 @@ import { state, trigger, style, transition, animate } from '@angular/animations'
 import { Router } from '@angular/router';
 import { AuthService } from 'src/service/auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Toast, ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
@@ -64,7 +65,8 @@ export class AppComponent {
 
   constructor(
     public router: Router,
-    private authSvc: AuthService
+    private authSvc: AuthService,
+    private toastSvc: ToastrService
   ){}
 
   title = 'uin-radio-bo';
@@ -82,13 +84,14 @@ export class AppComponent {
 
     try{
       let res: any = await this.authSvc.login(this.form.value).toPromise()
-      if(res.status == 0) alert("Wrong email and/or password combinations")
+      if(res.status == 0) this.toastSvc.error("Wrong email and/or password combinations")
       else {
         if(res.as == 1){
-          alert("Login is successful")
+          this.toastSvc.success("Login is successful")
           this.authSvc.writeAdminToken(res)
+          this.form.reset()
         }else{
-          alert("You don't have access to be admin")
+          this.toastSvc.error("You don't have access to be admin")
         }
       }
 
@@ -102,5 +105,10 @@ export class AppComponent {
 
   isLoggedIn(){
     return this.authSvc.getAdmin()
+  }
+
+  logout(){
+    this.authSvc.logOut()
+    this.toastSvc.success("Logout is successful!")
   }
 }

@@ -1,4 +1,4 @@
-<div class="row mb-4" routerLink="/news/new">
+<div class="row mb-4 mr-1" routerLink="/news/new">
     <div class="col text-right">
         <button class="btn btn-primary">Create News</button>
     </div>
@@ -14,12 +14,19 @@
         <div class="subtitle news-preview"
         [innerHTML]="item.content">
         </div>
-        <div class="caption">
+        <div class="caption mt-2">
             Published on {{item.datetime}}
         </div>
     </div>
-    <div class="col-3 p-3 text-right">
-        <button class="btn btn-primary btn-sm mr-2" routerLink="/news/edit/{{item.id}}">Edit News</button>
-        <button class="btn btn-danger btn-sm">Delete News</button>
+    <div class="col-3 p-3 text-right" *ngIf="flags.isDeletingNews != item.id">
+        <button class="btn btn-primary btn-sm mr-2"
+        [disabled]="flags.isDeletingNews" routerLink="/news/edit/{{item.id}}">Edit News</button>
+        <button class="btn btn-danger btn-sm" (click)="deleteNews(item.title,item.id)"
+        [disabled]="flags.isDeletingNews">Delete News</button>
+    </div>
+    <div class="col-3 p-3 text-right" *ngIf="flags.isDeletingNews == item.id">
+        <span class="btn btn-danger btn-sm">
+            <div class="spinner-border spinner-border-sm" role="status"></div> Deleting...
+          </span>
     </div>
 </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NewsService } from 'src/service/news.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-list-news',
@@ -9,13 +10,38 @@ import { NewsService } from 'src/service/news.service';
 export class ListNewsComponent implements OnInit {
   listOfNews: any[]
   constructor(
-    private newsSvc: NewsService
+    private newsSvc: NewsService,
+    private toastSvc: ToastrService
   ) { }
 
+  flags={
+    isDeletingNews: false
+  }
+
   async ngOnInit(){
+    this.getNews()
+  }
+
+  async getNews(){
     let res: any= await this.newsSvc.getNews().toPromise()
     this.listOfNews = res
     console.log(this.listOfNews)
   }
 
+  async deleteNews(title, id){
+    var r = confirm(`News ${title} will be delete. Continue?`);
+    if (r) {
+      try{
+        this.flags.isDeletingNews=id
+        let res = await this.newsSvc.deleteNews(id).toPromise()
+        console.log(res)
+        this.toastSvc.success(`News ${title} has been deleted successfully`)
+        this.getNews()
+      }catch(e){
+        console.warn(e)
+      }finally{
+        this.flags.isDeletingNews=false
+      }
+    }
+  }
 }
