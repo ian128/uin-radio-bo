@@ -1,1 +1,35 @@
-<p>list-video works!</p>
+<div class="row mb-4 mr-1" routerLink="/video/new">
+    <div class="col text-right">
+        <button class="btn btn-primary">Create Video Post</button>
+    </div>
+</div>
+<div class="row m-3 border" *ngFor="let item of listOfVideos; let i=index">
+    <div class="col-4 p-0 video-img">
+        <img [src]="'http://developergadogado.xyz/mantapp/'+item.image" style="height: 100%; width: 100%; object-fit: cover;">
+    </div>
+    <div class="col-5 p-3">
+        <div class="title" >
+            {{item.title}}
+        </div>
+        <div class="subtitle video-preview text-justify"
+        [innerHTML]="item.content">
+        </div>
+        <div class="caption mt-2">
+            Published on {{item.datetime}}
+        </div>
+        <div class="caption mt-2">
+            <a [href]="item.videolink" target="_blank">Link Video</a>
+        </div>
+    </div>
+    <div class="col-3 p-3 text-right" *ngIf="flags.isDeletingVideo != item.id">
+        <button class="btn btn-primary btn-sm mr-2"
+        [disabled]="flags.isDeletingVideo" routerLink="/video/edit/{{item.id}}">Edit Video</button>
+        <button class="btn btn-danger btn-sm" (click)="deleteVideo(item.title,item.id)"
+        [disabled]="flags.isDeletingVideo">Delete Video</button>
+    </div>
+    <div class="col-3 p-3 text-right" *ngIf="flags.isDeletingVideo == item.id">
+        <span class="btn btn-danger btn-sm">
+            <div class="spinner-border spinner-border-sm" role="status"></div> Deleting...
+          </span>
+    </div>
+</div>

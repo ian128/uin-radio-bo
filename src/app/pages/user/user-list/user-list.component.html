@@ -1,3 +1,9 @@
+<div class="row mb-4 mr-1" routerLink="/user/new-admin">
+  <div class="col text-right">
+      <button class="btn btn-primary">Create Admin</button>
+  </div>
+</div>
+
 <div class="row">
     <div class="col">
         <table class="table">
@@ -26,7 +32,7 @@
                 </td>
                 <td *ngIf="flags.isDeletingUser != item.email">
                     <button class="btn btn-primary btn-sm mr-1"
-                    [disabled]="flags.isDeletingUser">Edit</button>
+                    [disabled]="flags.isDeletingUser" routerLink="/user/edit/{{item.id}}">Edit</button>
                     <button class="btn btn-danger btn-sm" (click)="deleteUser(item.nama, item.email)"
                     [disabled]="flags.isDeletingUser">Delete</button>
                 </td>

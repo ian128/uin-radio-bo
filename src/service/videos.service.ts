@@ -6,7 +6,8 @@ import { environment } from 'src/environments/environment';
 @Injectable({
     providedIn: 'root'
 })
-export class UserService{
+
+export class VideoService{
     constructor(
         private http: HttpClient
     ){}
@@ -22,28 +23,26 @@ export class UserService{
         return fData
     }
 
-    getUsers(){
-       return this.http.get(environment.base_API+'/user/')
+    getVideos(){
+        return this.http.get(environment.base_API+'/videos/index')
     }
 
-    async getUserDetail(id){
-        let res: any[]= await this.http.get<any>(environment.base_API+'/user/').toPromise()
+    async getVideoDetail(id){
+        let res: any[]= await this.http.get<any>(environment.base_API+'/videos/index').toPromise()
         let news = res.find( i => i.id == id)
         return news
     }
 
-    deleteUser(email){
-        let formData = new FormData()
-        formData.append('email', email)
-        return this.http.post(environment.base_API+'/user/delete/',formData)
+    deleteVideo(id){
+        return this.http.get(environment.base_API+'/videos/delete/'+id)
     }
 
-    createUser(body){
-        return this.http.post(environment.base_API+'user/add', this.convertToFormData(body))
+    createVideo(body){
+        return this.http.post(environment.base_API+'/videos/add', this.convertToFormData(body))
     }
 
-    editUser(id,body){
-        return this.http.post(environment.base_API+'/user/edit/'+id, this.convertToFormData(body))
+    editVideo(id, body){
+        return this.http.post(environment.base_API+'/videos/edit/'+id, this.convertToFormData(body))
     }
 
 }

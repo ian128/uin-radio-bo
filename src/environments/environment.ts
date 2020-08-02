@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  base_API: 'https://developergadogado.xyz/mantapp/index.php'
+  base_API: 'https://developergadogado.xyz/mantapp/index.php/'
 };
 
 /*

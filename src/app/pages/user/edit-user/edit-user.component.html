@@ -1,1 +1,59 @@
-<p>edit-user works!</p>
+<form [formGroup]="form">
+    <div class="row">
+        <div class="col-6">
+            <label>Name</label>
+            <input class="form-control" formControlName="name" placeholder="User Full Name">
+            <form-error [fCon]="form.controls.name"></form-error>
+            <label>Email</label>
+            <input class="form-control" formControlName="email" placeholder="User email">
+            <form-error [fCon]="form.controls.email"></form-error>
+            <label>Password</label>
+            <input class="form-control" type="password" formControlName="password" placeholder="password">
+            <form-error [fCon]="form.controls.password"></form-error>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <h6 class="text-primary bold">Gender</h6>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input class="form-check-input" formControlName="gender" type="radio" name="gender" id="male" value="M">
+                    <label class="form-check-label" for="male">Male</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input class="form-check-input" formControlName="gender" type="radio" name="gender" id="female" value="F">
+                    <label class="form-check-label" for="female">Female</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <h6 class="text-primary bold">Role</h6>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input class="form-check-input" formControlName="status" type="radio" name="status" id="reg" value="0">
+                    <label class="form-check-label" for="reg">Regular</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input class="form-check-input" formControlName="status" type="radio" name="status" id="admin" value="1">
+                    <label class="form-check-label" for="admin">Admin</label>
+                </div>
+            </div>
+            <label>Birth Date</label>
+            <div class="form-inline" formGroupName="bd">
+                <input class="form-control mr-2" type="number" formControlName="yyyy" placeholder="Year" style="width: 144pt;">
+                <input class="form-control mr-2" type="number" formControlName="mm"  placeholder="Month" style="width: 72pt;">
+                <input class="form-control" type="number"  formControlName="dd" placeholder="Date" style="width: 72pt;">
+            </div>
+            <label>Phone</label>
+            <input class="form-control" type="text" formControlName="phone" placeholder="Mobile Phone">
+            <form-error [fCon]="form.controls.phone"></form-error>
+        </div>
+    </div>
+   
+    <div class="row mt-3">
+        <div class="col text-right">
+            <button class="btn btn-danger mr-2" (click)="form.reset()">Discard</button>
+
+            <button class="btn btn-primary" [disabled]="!form.valid || this.flags.isProcessing" 
+            (click)="form.valid? submit(): null" [disabled]="!form.valid">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" [hidden]="!flags.isProcessing"></span>
+                {{this.flags.isProcessing? "Please wait.." : "Save"}}</button>
+        </div>
+    </div>
+</form>

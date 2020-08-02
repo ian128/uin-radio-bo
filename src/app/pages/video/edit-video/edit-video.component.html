@@ -1,1 +1,55 @@
-<p>edit-video works!</p>
+<form [formGroup]="form">
+    <div class="row">
+        <div class="col-6">
+            <label>Video Title</label>
+            <input class="form-control" formControlName="title" placeholder="title">
+            <form-error [fCon]="form.controls.title"></form-error>
+            <label>Author</label>
+            <input class="form-control" formControlName="author" placeholder="author">
+            <form-error [fCon]="form.controls.author"></form-error>
+            <label>Video url</label>
+            <input class="form-control" formControlName="videolink" placeholder="url to video">
+            <form-error [fCon]="form.controls.videolink"></form-error>
+        </div>
+        <div class="col-6">
+            <label>Video Thumbnail</label>
+            <div class="video-picture border" (click)="imageinput.click()">
+                <img [src]="selectedImg? selectedImg : '/assets/images/pictures/upload_image.png' ">
+                <input
+                style="display: none"
+                type="file" (change)="imageChanged($event)"
+                #imageinput accept=".png,.jpg">
+            </div>
+        </div>
+    </div>
+
+    <label>Video Content</label>
+    <quill-editor [styles]="{  height: '80vh'}"
+    [(ngModel)]="content"
+    [ngModelOptions]="{standalone: true}"
+    (ngModelChange)="updateRichText()">
+        <div quill-editor-toolbar>
+            <span class="ql-formats">
+            <button class="gbtn ql-bold" [title]="'Bold'"></button>
+            <button class="gbtn ql-italic" [title]="'Italic'"></button>
+            <button class="gbtn ql-underline" [title]="'Underline'"></button>
+            </span>
+            <span class="ql-formats">
+            <button class="gbtn ql-list" value="ordered" [title]="'List'"></button>
+            <button class="gbtn ql-list" value="bullet" [title]="'Bullet List'"></button>
+        </span>
+        </div>
+    </quill-editor>
+    <form-error [fCon]="form.controls.content"></form-error>
+
+    <div class="row mt-3">
+        <div class="col text-right">
+            <button class="btn btn-danger mr-2">Discard</button>
+
+            <button class="btn btn-primary" [disabled]="!form.valid || this.flags.isProcessing" 
+            (click)="form.valid? submit(): null" [disabled]="!form.valid">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" [hidden]="!flags.isProcessing"></span>
+                {{this.flags.isProcessing? "Please wait.." : "Save"}}</button>
+        </div>
+    </div>
+</form>
