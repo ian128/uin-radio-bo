@@ -12,7 +12,7 @@ import { Toast, ToastrService } from 'ngx-toastr';
   animations:[
     trigger('showSideBar', [
       state('false', style({
-        'width': '45pt',
+        'width': '12pt',
         'overflow': 'hidden'
       })),
       state('true', style({
@@ -29,7 +29,7 @@ import { Toast, ToastrService } from 'ngx-toastr';
 
     trigger('expandedMenu', [
       state('false', style({
-        'width': 'calc(100% - 45pt)',
+        'width': 'calc(100% - 12pt)',
       })),
       state('true', style({
         'width': 'calc(100% - 120pt)',
