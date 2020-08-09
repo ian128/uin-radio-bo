@@ -1,0 +1,35 @@
+<div class="row mb-4 mr-1" routerLink="/live-show/new">
+    <div class="col text-right">
+        <button class="btn btn-primary">Create Live Show</button>
+    </div>
+</div>
+<div class="row m-3 border" *ngFor="let item of listLiveShows; let i=index">
+    <div class="col-3 p-0 news-img">
+        <img [src]="'http://developergadogado.xyz/mantapp/'+item.image" style="height: 100%; width: 100%; object-fit: cover;">
+    </div>
+    <div class="col-6 p-3">
+        <div class="title" >
+           Live Show #{{item.id}}
+        </div>
+        <div class="subtitle content text-justify"
+        [innerHTML]="item.content">
+        </div>
+        <div class="caption mt-2">
+            Published on {{item.datetime}}
+        </div>
+        <div class="caption mt-2">
+            <a [href]="item.videolink" target="_blank">Link</a>
+        </div>
+    </div>
+    <div class="col-3 p-3 text-right" *ngIf="flags.isDeletingLiveShow != item.id">
+        <button class="btn btn-primary btn-sm mr-2"
+        [disabled]="flags.isDeletingLiveShow" routerLink="/live-show/edit/{{item.id}}">Edit Live Show</button>
+        <button class="btn btn-danger btn-sm" (click)="deleteLiveShow(item.id,item.id)"
+        [disabled]="flags.isDeletingLiveShow">Delete Live Show</button>
+    </div>
+    <div class="col-3 p-3 text-right" *ngIf="flags.isDeletingLiveShow == item.id">
+        <span class="btn btn-danger btn-sm">
+            <div class="spinner-border spinner-border-sm" role="status"></div> Deleting...
+          </span>
+    </div>
+</div>

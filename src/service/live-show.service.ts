@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 @Injectable({
     providedIn: 'root'
 })
-export class InquiryService{
+export class LiveShowService{
     constructor(
         private http: HttpClient
     ){}
@@ -24,9 +24,23 @@ export class InquiryService{
         return fData
     }
 
-    getInquiries(){
-       return this.http.get(environment.base_API+'contact/')
+    getLiveShows(){
+        return this.http.get(environment.base_API+'/liveshow/index')
     }
 
+    getSingleLiveShow(id){
+        return this.http.get(environment.base_API+'/liveshow/getLiveShow/'+id)
+    }
 
+    addLiveShow(body){
+        return this.http.post(environment.base_API+'/liveshow/add', this.convertToFormData(body))
+    }
+
+    deleteLiveShow(id){
+        return this.http.get(environment.base_API+'/liveshow/delete/'+id)
+    }
+
+    editLiveShow(id, body){
+        return this.http.post(environment.base_API+'/liveshow/edit/'+id, this.convertToFormData(body))
+    }
 }

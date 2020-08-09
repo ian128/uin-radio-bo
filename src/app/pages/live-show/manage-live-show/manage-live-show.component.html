@@ -2,12 +2,9 @@
     <div class="row">
         <div class="col-6">
             <div *ngIf="selectedID">
-                You are editing Video #{{selectedID}}
+                You are editing Live Show #{{selectedID}}
             </div>
 
-            <label>Video Title</label>
-            <input class="form-control" formControlName="title" placeholder="title">
-            <form-error [fCon]="form.controls.title"></form-error>
             <label>Video url</label>
             <input class="form-control" formControlName="videolink" placeholder="url to video">
             <form-error [fCon]="form.controls.videolink"></form-error>

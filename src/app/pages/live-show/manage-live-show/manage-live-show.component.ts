@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { NewsService } from 'src/service/news.service';
+import { VideoService } from 'src/service/videos.service';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import {Location} from '@angular/common';
-import { VideoService } from 'src/service/videos.service';
+import { LiveShowService } from 'src/service/live-show.service';
 
 @Component({
-  selector: 'app-edit-video',
-  templateUrl: './edit-video.component.html',
-  styleUrls: ['./edit-video.component.scss']
+  selector: 'app-manage-live-show',
+  templateUrl: './manage-live-show.component.html',
+  styleUrls: ['./manage-live-show.component.scss']
 })
-export class EditVideoComponent implements OnInit {
-
+export class ManageLiveShowComponent implements OnInit {
   selectedImg: any = '/assets/pictures/placeholder/img_upload.jpg'
   selectedImgFile: File
 
@@ -20,9 +19,6 @@ export class EditVideoComponent implements OnInit {
   content: any
 
   form = new FormGroup({
-    title: new FormControl(null,{
-      validators: [Validators.required]
-    }),
     datetime: new FormControl(null),
     image: new FormControl(null,{
       validators: [Validators.required]
@@ -40,7 +36,7 @@ export class EditVideoComponent implements OnInit {
   }
 
   constructor(
-    private videoSvc: VideoService,
+    private liveShowSvc: LiveShowService,
     private activatedRoute: ActivatedRoute,
     private toastSvc: ToastrService,
     private location: Location
@@ -50,7 +46,7 @@ export class EditVideoComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     if(this.selectedID){
-      let res = await this.videoSvc.getVideoDetail(this.selectedID)
+      let res: any = await this.liveShowSvc.getSingleLiveShow(this.selectedID).toPromise()
       res.image = 'http://developergadogado.xyz/mantapp/'+res.image
 
       this.selectedImg = res.image
@@ -106,17 +102,18 @@ export class EditVideoComponent implements OnInit {
     let body = this.form.value
     console.log(body)
     
+    
     this.flags.isProcessing=true
     try{
       if(this.selectedID){
-        let res = await this.videoSvc.editVideo(this.selectedID,body).toPromise()
+        let res = await this.liveShowSvc.editLiveShow(this.selectedID,body).toPromise()
         console.log(res)
-        this.toastSvc.success("Video has been edited successfully")
+        this.toastSvc.success("Live show has been edited successfully")
         this.location.back()
       }else{
-        let res = await this.videoSvc.createVideo(body).toPromise()
+        let res = await this.liveShowSvc.addLiveShow(body).toPromise()
         console.log(res)
-        this.toastSvc.success("Video has been created successfully")
+        this.toastSvc.success("Live show has been created successfully")
         this.location.back()
       }
     }catch(e){

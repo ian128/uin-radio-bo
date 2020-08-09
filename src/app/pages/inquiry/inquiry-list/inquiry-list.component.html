@@ -1,21 +1,27 @@
-<div class="row mb-4 mr-1" routerLink="/news/new">
-    <div class="col text-right">
-        <button class="btn btn-primary">Create News</button>
+<div class="row m-3 border" *ngFor="let item of listOfInquiries; let i=index">
+    <div class="col-3 p-3">
+        <div class="title">
+            {{item.name}}
+        </div>
+        <div>
+            {{item.email}}
+        </div>
+        <div>
+            {{item.datetime}}
+        </div>
     </div>
-</div>
+    <div class="col-6 p-3 border-left text-justify">
+        {{item.message}}
+    </div>
+  
+    <div class="col-3 p-3 text-right">
+        <span class="btn btn-danger btn-sm">
+            <div class="spinner-border spinner-border-sm" role="status"></div> Deleting...
+        </span>
 
-<div class="row mb-3 border" *ngFor="let item of listOfInquiries">
-    <div class="col-2">
-        <div class="subtitle">
-            Dari, 
-        </div>
-        <div class="subtitle">
-            {{item.name}} - {{item.email}}
-        </div>
+        <button class="btn btn-danger btn-sm">
+            Delete
+        </button>
     </div>
-    <div class="col-9 border m-2">
-        <div class="subtitle">
-            {{item.message}}
-        </div>
-    </div>
+
 </div>

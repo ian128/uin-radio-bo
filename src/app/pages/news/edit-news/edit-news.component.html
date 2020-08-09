@@ -1,6 +1,10 @@
 <form [formGroup]="form">
     <div class="row">
         <div class="col-6">
+            <div *ngIf="selectedID">
+                You are editing News #{{selectedID}}
+            </div>
+
             <label>News Title</label>
             <input class="form-control" formControlName="title" placeholder="news title">
             <form-error [fCon]="form.controls.title"></form-error>

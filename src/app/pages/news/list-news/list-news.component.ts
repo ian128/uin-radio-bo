@@ -15,7 +15,7 @@ export class ListNewsComponent implements OnInit {
   ) { }
 
   flags={
-    isDeletingNews: false
+    isDeletingNews: false,
   }
 
   async ngOnInit(){

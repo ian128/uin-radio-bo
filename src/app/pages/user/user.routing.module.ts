@@ -7,7 +7,7 @@ const routes: Routes=[
         path: 'list', component:  UserListComponent
     },
     {
-        path: 'new-admin', component: EditUserComponent,
+        path: 'new', component: EditUserComponent,
     },
     {
         path: 'edit/:id', component: EditUserComponent

@@ -27,4 +27,8 @@ export class InquiryListComponent implements OnInit {
     }
   }
 
+  async deleteInquiry(id){
+    
+  }
+
 }

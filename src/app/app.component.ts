@@ -85,7 +85,16 @@ export class AppComponent {
     if(s.includes('news/list')) return 'News List'
     else if(s.includes('news/edit')) return 'News Edit'
     else if(s.includes('news/new')) return 'New News'
+
     else if(s.includes('user/list')) return 'List User'
+    else if(s.includes('/user/new')) return 'New User'
+    else if(s.includes('/user/edit')) return 'Modify User'
+
+    else if(s.includes('video/list')) return 'Video List'
+    else if(s.includes('video/new')) return 'New Video'
+    else if(s.includes('video/edit')) return 'Edit Video'
+
+    else if(s.includes('inquiry/list')) return 'Inquiries'
   }
 
   async login(){
