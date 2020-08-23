@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { CookieService } from 'ngx-cookie-service';
+import { StorageService } from './secure-storage.service';
 
 @Injectable({
     providedIn: 'root'
@@ -10,7 +11,8 @@ import { CookieService } from 'ngx-cookie-service';
 export class AuthService{
     constructor(
         private http: HttpClient,
-        private cookiesSvc: CookieService
+        private cookiesSvc: CookieService,
+        private secureStorageSvc: StorageService
     ){}
 
     private convertToFormData(body){
@@ -26,7 +28,7 @@ export class AuthService{
     }
 
     logOut(){
-        console.log(this.cookiesSvc.delete('admin','/'))
+        this.secureStorageSvc.clearSingleToken('admin')
         return true
     }
 
@@ -36,15 +38,11 @@ export class AuthService{
     }
 
     writeAdminToken(body){
-        this.cookiesSvc.set('admin', JSON.stringify(body), new Date(new Date().getTime() + 86400000), '/')
+        this.secureStorageSvc.setValue('admin', body)
     }
 
     getAdmin(){
-        let res = this.cookiesSvc.get('admin')
-        try{
-            return JSON.parse(res)
-        }catch(e){
-            return false
-        }
+        let res = this.secureStorageSvc.getValue('admin')
+        return res
     }
 }
