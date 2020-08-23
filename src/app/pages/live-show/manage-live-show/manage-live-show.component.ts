@@ -19,6 +19,9 @@ export class ManageLiveShowComponent implements OnInit {
   content: any
 
   form = new FormGroup({
+    schedule: new FormControl(null,{
+      validators: [Validators.required]
+    }),
     datetime: new FormControl(null),
     image: new FormControl(null,{
       validators: [Validators.required]
@@ -56,6 +59,7 @@ export class ManageLiveShowComponent implements OnInit {
       this.form.patchValue(res)
       this.updateRichText()
     }
+
   }
 
   imageChanged(e){
@@ -100,6 +104,8 @@ export class ManageLiveShowComponent implements OnInit {
   async submit(){
     this.form.controls.datetime.patchValue(new Date().toISOString())
     let body = this.form.value
+
+    body.schedule = body.schedule.toISOString()
     console.log(body)
     
     

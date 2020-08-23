@@ -4,6 +4,7 @@
 @import './assets/scss/theme.scss';
 @import './assets/scss/toastr.scss';
 @import './assets/fonts/font.scss';
+@import "~ng-pick-datetime/assets/style/picker.min.css";
 
 $theme-colors: (
   "primary": $primary,

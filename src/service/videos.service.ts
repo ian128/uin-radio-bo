@@ -15,7 +15,10 @@ export class VideoService{
     private convertToFormData(body){
         let fData = new FormData()
         for(let i in body){
-            if(i == 'image') fData.append(i, body[i], body[i].name)
+            if(i == 'image') {
+                if(body[i] instanceof Blob) fData.append(i, body[i], body[i].name)
+                else continue
+            }
             else fData.append(i, body[i])
 
             console.log(i,"=>",fData.get(i))
