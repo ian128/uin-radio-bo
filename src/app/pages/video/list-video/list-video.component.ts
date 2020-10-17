@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { VideoService } from 'src/service/videos.service';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-list-video',
@@ -9,7 +10,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ListVideoComponent implements OnInit {
   listOfVideos: any[]
-  
+  imgPrefix = environment.host
+
   flags={
     isLoading: false,
     isDeletingVideo: false,

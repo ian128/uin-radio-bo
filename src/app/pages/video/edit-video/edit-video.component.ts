@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import {Location} from '@angular/common';
 import { VideoService } from 'src/service/videos.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-edit-video',
@@ -51,7 +52,7 @@ export class EditVideoComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     if(this.selectedID){
       let res = await this.videoSvc.getVideoDetail(this.selectedID)
-      res.image = 'http://developergadogado.xyz/mantapp/'+res.image
+      res.image = environment.host+res.image
 
       this.selectedImg = res.image
 

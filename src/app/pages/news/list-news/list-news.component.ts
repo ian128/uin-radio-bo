@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NewsService } from 'src/service/news.service';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-list-news',
@@ -8,6 +9,8 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./list-news.component.scss']
 })
 export class ListNewsComponent implements OnInit {
+  imgPrefix = environment.host
+
   listOfNews: any[]
   constructor(
     private newsSvc: NewsService,

@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   base_API: 'https://developergadogado.xyz/mantapp/index.php/',
+  host: 'https://developergadogado.xyz/mantapp/',
   chatFirestoreAuth:{
     username: "uin-radio-bo-admin@user.com",
     password: "3)&(!@g321874g0GKtoodg8717tBHDF^81*(&!^#Bef16837gd871trw6d1"
@@ -16,7 +17,7 @@ export const environment = {
     projectId: "uin-radio",
     storageBucket: "uin-radio.appspot.com",
     messagingSenderId: "415994367211",
-    appId: "1:415994367211:web:31861492f9dd676f92c2ae"
+    appId: "1:415994367211:web:835bc20c2ca9c42392c2ae"
   }
 };
 

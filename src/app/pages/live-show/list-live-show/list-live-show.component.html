@@ -8,7 +8,7 @@
 </div>
 <div class="row m-3 border" *ngFor="let item of listLiveShows; let i=index">
     <div class="col-3 p-0 news-img">
-        <img [src]="'http://developergadogado.xyz/mantapp/'+item.image" style="height: 100%; width: 100%; object-fit: cover;">
+        <img [src]="imgPrefix+item.image" style="height: 100%; width: 100%; object-fit: cover;">
     </div>
     <div class="col-6 p-3">
         <div class="title" >

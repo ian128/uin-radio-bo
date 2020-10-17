@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LiveShowService } from 'src/service/live-show.service';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-list-live-show',
@@ -8,6 +9,8 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./list-live-show.component.scss']
 })
 export class ListLiveShowComponent implements OnInit {
+  imgPrefix = environment.host
+
   listLiveShows: any[]
   constructor(
     private liveShowSvc: LiveShowService,

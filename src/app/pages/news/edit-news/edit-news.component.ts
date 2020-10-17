@@ -4,6 +4,7 @@ import { NewsService } from 'src/service/news.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Location } from '@angular/common';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-edit-news',
@@ -49,7 +50,7 @@ export class EditNewsComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     if(this.selectedID){
       let res = await this.newsSvc.getNewsDetail(this.selectedID)
-      res.image = 'http://developergadogado.xyz/mantapp/'+res.image
+      res.image = environment.host+res.image
 
       this.selectedImg = res.image
 

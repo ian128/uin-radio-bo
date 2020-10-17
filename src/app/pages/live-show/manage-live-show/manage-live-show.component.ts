@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import {Location} from '@angular/common';
 import { LiveShowService } from 'src/service/live-show.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-manage-live-show',
@@ -50,7 +51,7 @@ export class ManageLiveShowComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     if(this.selectedID){
       let res: any = await this.liveShowSvc.getSingleLiveShow(this.selectedID).toPromise()
-      res.image = 'http://developergadogado.xyz/mantapp/'+res.image
+      res.image = environment.host+res.image
 
       this.selectedImg = res.image
 
