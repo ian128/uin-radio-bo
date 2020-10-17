@@ -1,13 +1,17 @@
 import { Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable({
     providedIn: 'root'
 })
 export class LiveShowService{
     constructor(
-        private http: HttpClient
+        private http: HttpClient,
+        private db: AngularFirestore,
+        private auth: AngularFireAuth
     ){}
 
     private convertToFormData(body){
@@ -42,5 +46,17 @@ export class LiveShowService{
 
     editLiveShow(id, body){
         return this.http.post(environment.base_API+'/liveshow/edit/'+id, this.convertToFormData(body))
+    }
+    
+    async createLiveShowChat(id){
+        await this.auth.signInWithEmailAndPassword(environment.chatFirestoreAuth.username, environment.chatFirestoreAuth.password)
+        await this.db.collection('live-chats').doc(String(id)).set({created: new Date().toISOString()})
+        await this.auth.signOut()
+    } 
+    
+    async destroyLiveShowChat(id){
+        await this.auth.signInWithEmailAndPassword(environment.chatFirestoreAuth.username, environment.chatFirestoreAuth.password)
+        await this.db.collection('live-chats').doc(String(id)).delete()
+        await this.auth.signOut()
     }
 }

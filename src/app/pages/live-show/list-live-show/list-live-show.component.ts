@@ -14,8 +14,9 @@ export class ListLiveShowComponent implements OnInit {
   listLiveShows: any[]
   constructor(
     private liveShowSvc: LiveShowService,
-    private toastSvc: ToastrService
+    private toastSvc: ToastrService,
   ) { }
+
 
   flags={
     isDeletingLiveShow:false 
@@ -40,8 +41,11 @@ export class ListLiveShowComponent implements OnInit {
     if (r) {
       try{
         this.flags.isDeletingLiveShow=id
-        let res = await this.liveShowSvc.deleteLiveShow(id).toPromise()
+        let res= await this.liveShowSvc.deleteLiveShow(id).toPromise()
         console.log(res)
+
+        await this.liveShowSvc.destroyLiveShowChat(id)
+
         this.toastSvc.success(`Live Show ${title} has been deleted successfully`)
         this.getLiveShows()
       }catch(e){

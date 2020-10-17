@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { VideoService } from 'src/service/videos.service';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import {Location} from '@angular/common';
 import { LiveShowService } from 'src/service/live-show.service';
 import { environment } from 'src/environments/environment';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-manage-live-show',
@@ -43,7 +43,8 @@ export class ManageLiveShowComponent implements OnInit {
     private liveShowSvc: LiveShowService,
     private activatedRoute: ActivatedRoute,
     private toastSvc: ToastrService,
-    private location: Location
+    private location: Location,
+    private db: AngularFirestore
   ) {
     this.selectedID = this.activatedRoute.snapshot.params.id
   }
@@ -122,10 +123,13 @@ export class ManageLiveShowComponent implements OnInit {
         this.toastSvc.success("Live show has been edited successfully")
         this.location.back()
       }else{
-        let res = await this.liveShowSvc.addLiveShow(body).toPromise()
+        let res: any = await this.liveShowSvc.addLiveShow(body).toPromise()
         console.log(res)
+        
+        await this.liveShowSvc.createLiveShowChat(res.id)
         this.toastSvc.success("Live show has been created successfully")
         this.location.back()
+
       }
     }catch(e){
       console.warn(e)

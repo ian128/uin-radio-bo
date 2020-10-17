@@ -44,7 +44,7 @@ export class EditVideoComponent implements OnInit {
     private videoSvc: VideoService,
     private activatedRoute: ActivatedRoute,
     private toastSvc: ToastrService,
-    private location: Location
+    private location: Location,
   ) {
     this.selectedID = this.activatedRoute.snapshot.params.id
   }
@@ -115,7 +115,7 @@ export class EditVideoComponent implements OnInit {
         this.toastSvc.success("Video has been edited successfully")
         this.location.back()
       }else{
-        let res = await this.videoSvc.createVideo(body).toPromise()
+        let res: any = await this.videoSvc.createVideo(body).toPromise()
         console.log(res)
         this.toastSvc.success("Video has been created successfully")
         this.location.back()
