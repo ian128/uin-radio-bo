@@ -5,6 +5,8 @@ import { ManageLiveShowComponent } from './manage-live-show/manage-live-show.com
 import { LiveShowRoutingModule } from './live-show.routing.module';
 import { QuillModule } from 'ngx-quill';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LoaderInterceptor } from 'src/app/interceptors/loader-interceptor';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,6 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
     OwlDateTimeModule, 
     OwlNativeDateTimeModule,
     QuillModule.forRoot()
-  ]
+  ],
 })
 export class LiveShowModule { }

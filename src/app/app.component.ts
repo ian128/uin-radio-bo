@@ -3,7 +3,8 @@ import { state, trigger, style, transition, animate } from '@angular/animations'
 import { Router, NavigationEnd } from '@angular/router';
 import { AuthService } from 'src/service/auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Toast, ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
+import { LoadIndicatorService } from 'src/service/utils/load-indicator.service';
 
 @Component({
   selector: 'app-root',
@@ -47,6 +48,7 @@ import { Toast, ToastrService } from 'ngx-toastr';
 })
 export class AppComponent {
   collapsed: boolean
+  onRequestHTTP: boolean
 
   flags={
     isProcessing: false
@@ -66,7 +68,8 @@ export class AppComponent {
   constructor(
     public router: Router,
     private authSvc: AuthService,
-    private toastSvc: ToastrService
+    private toastSvc: ToastrService,
+    private loadSvc: LoadIndicatorService
   ){
 
     this.router.events.subscribe(
@@ -76,6 +79,13 @@ export class AppComponent {
         }
       }
     )
+
+    this.loadSvc.loaderStatusSubject.subscribe(res=>{
+      console.log(res)
+      setTimeout(()=>{
+        this.onRequestHTTP=res
+      })
+    })
   }
 
   title = 'uin-radio-bo';
@@ -87,14 +97,19 @@ export class AppComponent {
     else if(s.includes('news/new')) return 'New News'
 
     else if(s.includes('user/list')) return 'List User'
-    else if(s.includes('/user/new')) return 'New User'
-    else if(s.includes('/user/edit')) return 'Modify User'
+    else if(s.includes('user/new')) return 'New User'
+    else if(s.includes('user/edit')) return 'Modify User'
+
+    else if(s.includes('live-show/list')) return 'Live Show List'
+    else if(s.includes('live-show/new')) return 'New Live Show'
+    else if(s.includes('live-show/edit')) return 'Edit Live Show'
 
     else if(s.includes('video/list')) return 'Video List'
     else if(s.includes('video/new')) return 'New Video'
     else if(s.includes('video/edit')) return 'Edit Video'
 
     else if(s.includes('inquiry/list')) return 'Inquiries'
+
   }
 
   async login(){

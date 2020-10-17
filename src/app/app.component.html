@@ -17,7 +17,7 @@
   </form>
 </div>
 
-<ng-template #loggedIn>
+<ng-template #loggedIn>  
   <div class="row p-0">
     <div [@showSideBar]="collapsed ? 'true': 'false'"class="bg-dark">
       <ul class="pl-3">
@@ -48,12 +48,15 @@
   
       <nav class="navbar navbar-dark bg-dark" style="height: 50pt !important">
     
-        <a class="navbar-brand">
-          <button class="navbar-toggler" type="button"
+        <a class="navbar-brand d-flex align-items-center">
+          <button class="navbar-toggler mr-3" type="button"
           (click)="collapsed= !collapsed">
             <span class="navbar-toggler-icon"></span>
           </button>
-          UIN Radio Backend - {{link()}}
+            UIN Radio Backend - {{link()}}
+          <div class="spinner-border text-primary ml-3" *ngIf="onRequestHTTP" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
         </a>
 
         <button class="mr-3 btn btn-info" (click)="logout()">Logout</button>
@@ -67,4 +70,3 @@
     </div>
   </div>
 </ng-template>
-

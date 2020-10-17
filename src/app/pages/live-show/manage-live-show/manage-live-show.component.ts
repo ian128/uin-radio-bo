@@ -57,9 +57,13 @@ export class ManageLiveShowComponent implements OnInit {
       this.content = res.content
       console.log(res)
       this.form.patchValue(res)
+      this.form.controls.schedule.setValue(res.datetime)
       this.updateRichText()
     }
+  }
 
+  scheduleChanged(event){
+    console.log(event)
   }
 
   imageChanged(e){
@@ -102,12 +106,12 @@ export class ManageLiveShowComponent implements OnInit {
   }
   
   async submit(){
-    this.form.controls.datetime.patchValue(new Date().toISOString())
-    let body = this.form.value
+    this.form.controls.datetime.patchValue(new Date(this.form.value.schedule).toISOString())
 
-    body.schedule = body.schedule.toISOString()
-    console.log(body)
+    let body = this.form.value
+    delete body.schedule
     
+    console.log(body)
     
     this.flags.isProcessing=true
     try{

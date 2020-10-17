@@ -3,3 +3,9 @@
     font-size: 20pt;
     color: black !important;
 }
+
+.load-indicator{
+    z-index: 99;
+    position: absolute !important;
+    top: 0;
+}

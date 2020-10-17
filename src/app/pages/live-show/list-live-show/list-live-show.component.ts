@@ -49,4 +49,11 @@ export class ListLiveShowComponent implements OnInit {
     }
   }
 
+  genDate(item){
+    try{
+      return  new Date(item).toLocaleDateString()+' '+new Date(item).toLocaleTimeString()
+    }catch(e){
+      return ""
+    }
+  }
 }

@@ -1,4 +1,7 @@
 <div class="row mb-4 mr-1" routerLink="/live-show/new">
+    <div clas="col ml-3">
+        Latest live show is at the bottom of the list
+    </div>
     <div class="col text-right">
         <button class="btn btn-primary">Create Live Show</button>
     </div>
@@ -10,12 +13,15 @@
     <div class="col-6 p-3">
         <div class="title" >
            Live Show #{{item.id}}
+           <span class="badge badge-primary" *ngIf="i+1 == listLiveShows.length">
+               Current Live Show
+           </span>
         </div>
         <div class="subtitle content text-justify"
         [innerHTML]="item.content">
         </div>
         <div class="caption mt-2">
-            Published on {{item.datetime}}
+            Scheduled on {{genDate(item.datetime)}}
         </div>
         <div class="caption mt-2">
             <a [href]="item.videolink" target="_blank">Link</a>

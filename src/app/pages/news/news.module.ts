@@ -4,6 +4,8 @@ import { NewsRoutingModule } from './news.routing.module';
 import { ListNewsComponent } from './list-news/list-news.component';
 import { EditNewsComponent } from './edit-news/edit-news.component';
 import { QuillModule } from 'ngx-quill'
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LoaderInterceptor } from 'src/app/interceptors/loader-interceptor';
 
 @NgModule({
   declarations: [
@@ -14,6 +16,6 @@ import { QuillModule } from 'ngx-quill'
     NewsRoutingModule,
     SharedModule,
     QuillModule.forRoot()
-  ]
+  ],
 })
 export class NewsModule { }
