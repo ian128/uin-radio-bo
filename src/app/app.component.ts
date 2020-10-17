@@ -75,7 +75,7 @@ export class AppComponent {
     this.router.events.subscribe(
       (res)=>{
         if(res instanceof NavigationEnd){
-          window.scrollTo(0, 0);
+          document.getElementById('outlet').scrollTo(0, 0);
         }
       }
     )
