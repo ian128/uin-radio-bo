@@ -13,6 +13,11 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 
+import localeId from '@angular/common/locales/id'; 
+import { registerLocaleData } from '@angular/common';
+import { LOCALE_ID } from '@angular/core';
+registerLocaleData(localeId, 'id'); 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +34,7 @@ import { environment } from 'src/environments/environment';
     AngularFireAuthModule
   ],
   providers: [
+    { provide: LOCALE_ID, useValue: "id-ID" }, 
     CookieService,
   ],
   bootstrap: [AppComponent]
