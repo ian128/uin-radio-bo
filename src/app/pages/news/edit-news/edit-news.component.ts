@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./edit-news.component.scss']
 })
 export class EditNewsComponent implements OnInit {
-  selectedImg: any = '/assets/pictures/placeholder/img_upload.jpg'
+  selectedImg: any = 'assets/pictures/placeholder/img_upload.jpg'
   selectedImgFile: File
 
   selectedID: any

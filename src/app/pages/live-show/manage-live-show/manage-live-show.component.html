@@ -23,7 +23,7 @@
         <div class="col-6">
             <label>Video Thumbnail</label>
             <div class="video-picture border" (click)="imageinput.click()">
-                <img [src]="selectedImg? selectedImg : '/assets/images/pictures/upload_image.png' ">
+                <img [src]="selectedImg? selectedImg : 'assets/images/pictures/upload_image.png' ">
                 <input
                 style="display: none"
                 type="file" (change)="imageChanged($event)"

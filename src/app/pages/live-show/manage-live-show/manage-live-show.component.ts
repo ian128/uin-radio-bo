@@ -13,7 +13,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
   styleUrls: ['./manage-live-show.component.scss']
 })
 export class ManageLiveShowComponent implements OnInit {
-  selectedImg: any = '/assets/pictures/placeholder/img_upload.jpg'
+  selectedImg: any = 'assets/pictures/placeholder/img_upload.jpg'
   selectedImgFile: File
 
   selectedID: any

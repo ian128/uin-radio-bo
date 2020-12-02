@@ -14,7 +14,7 @@ import { environment } from 'src/environments/environment';
 })
 export class EditVideoComponent implements OnInit {
 
-  selectedImg: any = '/assets/pictures/placeholder/img_upload.jpg'
+  selectedImg: any = 'assets/pictures/placeholder/img_upload.jpg'
   selectedImgFile: File
 
   selectedID: any

@@ -5,6 +5,7 @@ import { AuthService } from 'src/service/auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { LoadIndicatorService } from 'src/service/utils/load-indicator.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -72,6 +73,12 @@ export class AppComponent {
     private loadSvc: LoadIndicatorService
   ){
 
+    if(environment.production){
+      console.warn("Console log will be obscured!")
+      window.console.log = function () {};
+    }
+
+    
     this.router.events.subscribe(
       (res)=>{
         if(res instanceof NavigationEnd){
