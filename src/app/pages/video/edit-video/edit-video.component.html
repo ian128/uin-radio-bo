@@ -8,7 +8,8 @@
             <label>Video Title</label>
             <input class="form-control" formControlName="title" placeholder="title">
             <form-error [fCon]="form.controls.title"></form-error>
-            <label>Video url</label>
+            
+            <label>Video url (must supports embedding)</label>
             <input class="form-control" formControlName="videolink" placeholder="url to video">
             <form-error [fCon]="form.controls.videolink"></form-error>
         </div>

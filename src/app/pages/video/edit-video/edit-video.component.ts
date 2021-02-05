@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import {Location} from '@angular/common';
 import { VideoService } from 'src/service/videos.service';
 import { environment } from 'src/environments/environment';
+import { ExtendedFormValidator } from 'src/functions/form-validator';
 
 @Component({
   selector: 'app-edit-video',
@@ -22,7 +23,7 @@ export class EditVideoComponent implements OnInit {
 
   form = new FormGroup({
     title: new FormControl(null,{
-      validators: [Validators.required]
+      validators: [Validators.required, ExtendedFormValidator.Min50Char]
     }),
     datetime: new FormControl(null),
     image: new FormControl(null,{

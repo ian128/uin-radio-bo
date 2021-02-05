@@ -15,7 +15,7 @@
         [innerHTML]="item.content">
         </div>
         <div class="caption mt-2">
-            Published on {{item.datetime}}
+            Published on {{item.datetime | date:'long'}}
         </div>
         <div class="caption mt-2">
             <a [href]="item.videolink" target="_blank">Link Video</a>

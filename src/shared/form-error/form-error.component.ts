@@ -11,6 +11,7 @@ export class FormErrorComponent implements OnInit {
   errors={
     'required':"This field is required",
     'email': "A valid email is required",
+    'max50Char':"Text length can't no more than 50 characters"
   }
   constructor() { }
 

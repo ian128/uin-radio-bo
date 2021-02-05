@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Location } from '@angular/common';
 import { environment } from 'src/environments/environment';
+import { ExtendedFormValidator } from 'src/functions/form-validator';
 
 @Component({
   selector: 'app-edit-news',
@@ -20,7 +21,7 @@ export class EditNewsComponent implements OnInit {
 
   form = new FormGroup({
     title: new FormControl(null,{
-      validators: [Validators.required]
+      validators: [Validators.required, ExtendedFormValidator.Min50Char]
     }),
     author: new FormControl(null,{
       validators: [Validators.required]
